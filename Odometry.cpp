@@ -1,0 +1,30 @@
+/*
+ * Odometry.cpp memiliki kelas Odometry yang digunakan untuk membaca posisi robot (X, Y, Theta)
+ * Parameter angle harus diset sesuai penempatan rotary encoder pada robot
+*/
+
+#include "Odometry.h"
+
+Odometry::Odometry(int dia, int resA, int resB) {
+  wheelDia = dia;
+  encResA = resA;
+  encResB = resB;
+}
+
+void Odometry::readCoordinate(int wheelPosA, int wheelPosB) {
+  Da = PI * wheelDia * (wheelPosA / encResA);
+  Db = PI * wheelDia * (wheelPosB / encResB);
+
+  diffA = Da - prevA;
+  prevA = Da;
+  diffB = Db - prevB;
+  prevB = Db;
+
+  Ax = diffA * (cos(radians(angleA)));
+  Ay = diffA * (sin(radians(angleA)));
+  Bx = diffB * (cos(radians(angleB)));
+  By = diffB * (sin(radians(angleB)));
+
+  this->posX = this->posX + (Ax + Bx);
+  this->posY= this->posY + (Ay + By);
+}
