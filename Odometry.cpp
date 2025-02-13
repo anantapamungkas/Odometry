@@ -20,10 +20,10 @@ void Odometry::readCoordinate(int wheelPosA, int wheelPosB) {
   diffB = Db - prevB;
   prevB = Db;
 
-  Ax = diffA * (cos(radians(angleA)));
-  Ay = diffA * (sin(radians(angleA)));
-  Bx = diffB * (cos(radians(angleB)));
-  By = diffB * (sin(radians(angleB)));
+  Ax = diffA * (cos(radians(wheelAngleA)));
+  Ay = diffA * (sin(radians(wheelAngleA)));
+  Bx = diffB * (cos(radians(wheelAngleB)));
+  By = diffB * (sin(radians(wheelAngleB)));
 
   this->posX = this->posX + (Ax + Bx);
   this->posY= this->posY + (Ay + By);
